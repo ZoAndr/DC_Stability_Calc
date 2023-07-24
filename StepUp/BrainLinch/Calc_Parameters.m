@@ -5,9 +5,9 @@ R_Load = Vo / Io;
 
 
 Z_L = i * 2 * pi * s * L;
-Z_ON = Z_L * R_DS + R_I_SEN + R_L;
+Z_ON = Z_L + R_DS + R_I_SEN + R_L;
 Z_C = - i * 1 ./ (2 * pi * s * C) + R_ESR;
-Z_OFF = Z_C * R_Load ./ (Z_C + R_Load);
+Z_OFF = (Z_C .* R_Load) ./ (Z_C + R_Load);
 
 
 
@@ -25,10 +25,10 @@ D_DCM_0 = (1 /  Vi                               ) * (2 * L * (Vo - Vi     ) / T
 D_DCM   = (1 / (Vi - (Vo - Vi) * Io / Vi * R_tot)) * (2 * L * (Vo - Vi + Vd) / Ts * Io)^0.5;
 
 
-M_CCM = Vo / Vi;
+M_CCM = 1 / (1 - D_CCM); %Vo / Vi;
 
 D = D_DCM;
-M_DCM = (1 + (2 * (Vo + Vd) * D^2 * Ts) / (Io * L)  )  / 2;
+M_DCM =  (1    +    (1 + (2 * (Vo + Vd) * D^2 * Ts) / (Io * L)  )^0.5    )  / 2;
 
 
 m_i_ON = Vi / L;
