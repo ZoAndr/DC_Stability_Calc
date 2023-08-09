@@ -1,12 +1,12 @@
-function[Z_ON, Z_OFF, Z_L, Z_C, R_Load,   D_DCM_0, D_DCM, D_CCM_0, D_CCM, D_disch,   M_CCM, M_DCM,  m_i_ON, m_i_OFF] = ...
+function[Z_ON, Z_OFF, Z_L, Z_C, R_Load,   D_DCM_0, D_DCM, D_CCM_0, D_CCM, D_disch,   M_CCM, M_DCM,  m_i_ON, m_i_OFF, Ts] = ...
     Calc_Parameters(s, fs,    Vo, Vi,    C, L,    R_L, R_I_SEN, R_DS, R_ESR, Vd,   Io)
 
 R_Load = Vo / Io;
 
 
-Z_L = i * 2 * pi * s * L;
+Z_L = s * L;
 Z_ON = Z_L + R_DS + R_I_SEN + R_L;
-Z_C = - i * 1 ./ (2 * pi * s * C) + R_ESR;
+Z_C =  1 ./ (s * C) + R_ESR;
 Z_OFF = (Z_C .* R_Load) ./ (Z_C + R_Load);
 
 
